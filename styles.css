@@ -1,6 +1,6 @@
 :root{
   --bg-primary:#000000;
-  --bg-secondary:#171717;   /* grigio pulsanti */
+  --bg-secondary:#171717;
   --bg-tertiary:#262626;
   --text-primary:#ffffff;
   --text-secondary:#a3a3a3;
@@ -20,7 +20,6 @@ body{
   font-family:'JetBrains Mono', monospace;
   color:var(--text-primary);
 
-  /* Sfondo: bagliore verde scuro/opaco */
   background:
     radial-gradient(900px 520px at 20% 15%, rgba(85,233,41,0.14) 0%, rgba(85,233,41,0.06) 38%, rgba(85,233,41,0.00) 70%),
     radial-gradient(750px 480px at 80% 35%, rgba(85,233,41,0.10) 0%, rgba(85,233,41,0.04) 40%, rgba(85,233,41,0.00) 72%),
@@ -40,7 +39,6 @@ body{
   animation:fadeIn .6s ease-out;
 }
 
-/* Animazioni */
 @keyframes fadeIn{
   from{opacity:0; transform:translateY(20px);}
   to{opacity:1; transform:translateY(0);}
@@ -56,20 +54,18 @@ body{
   to{opacity:1; transform:translateX(0);}
 }
 
-/* Header */
 .header{
   text-align:center;
   margin-bottom:32px;
   animation:slideDown .5s ease-out;
 }
 
-/* Riserva spazio fisso al logo: titolo e pulsanti NON cambiano mai altezza */
 .logo-container{
   margin-bottom:20px;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:120px; /* = dimensione logo desktop */
+  height:120px;
 }
 
 .logo{
@@ -103,7 +99,6 @@ body{
   letter-spacing:-0.01em;
 }
 
-/* Menu */
 .menu{
   display:flex;
   flex-direction:column;
@@ -123,12 +118,10 @@ body{
   display:flex;
   align-items:center;
 
-  /* Centra icona + testo nel box */
   justify-content:center;
   text-align:center;
   gap:12px;
 
-  /* Pulsanti: grigio pieno */
   background:var(--bg-secondary);
 
   transition:transform .2s ease, border-color .2s ease, background .2s ease;
@@ -174,7 +167,6 @@ body{
   object-fit:contain;
 }
 
-/* Footer */
 .footer{
   margin-top:48px;
   opacity:0;
@@ -186,12 +178,10 @@ body{
   background:var(--border);
 }
 
-/* Utility */
 .hidden{
   display:none !important;
 }
 
-/* Responsive */
 @media (max-width:640px){
   .container{max-width:300px;}
   .logo-container{height:100px;}

@@ -1,65 +1,40 @@
-// ============================================
-// 🔧 CONFIGURAZIONE - MODIFICA QUI
-// ============================================
-
 const CONFIG = {
-    // Logo e Titolo
     logo: {
         src: 'https://cdn.discordapp.com/attachments/1458250010788630581/1466069930163179540/2raw.png?ex=697b6785&is=697a1605&hm=2ad2c0fda030fabc78060b047dbe7f31becb7dd1a737cf4d0dd2f910307de79f&', // URL del tuo logo
         alt: 'Scrypt logo'
     },
     
     title: {
-        text: '>Scrypt',            // Testo del titolo
-        show: true                    // true = mostra | false = nascondi
+        text: '>Scrypt',
+        show: true
     },
 
-    // Pulsanti del menu
-    // Puoi usare emoji OPPURE URL di immagini custom
     buttons: [
         {
-            icon: 'https://cdn.simpleicons.org/instagram/E4405F',  // URL immagine
+            icon: 'https://cdn.simpleicons.org/instagram/E4405F',
             text: 'Instagram',
             url: 'https://www.instagram.com/scryptroleplay/'
         },
         {
-            icon: 'https://cdn.simpleicons.org/tiktok/000000',     // URL immagine
+            icon: 'https://cdn.simpleicons.org/tiktok/000000',   
             text: 'TikTok',
             url: 'https://www.tiktok.com/@scryptroleplay?lang=e'
         },
         {
-            icon: 'https://cdn.simpleicons.org/youtube/FF0000',    // URL immagine
+            icon: 'https://cdn.simpleicons.org/youtube/FF0000',  
             text: 'YouTube',
             url: 'https://youtube.com/@tuoaccount'
         },
         {
-            icon: 'https://cdn.simpleicons.org/twitch/9146FF',     // URL immagine
+            icon: 'https://cdn.simpleicons.org/twitch/9146FF',   
             text: 'Twitch',
             url: 'https://twitch.tv/tuoaccount'
         },
         {
-            icon: 'https://cdn.simpleicons.org/discord/9146FF',  // Oppure usa emoji
+            icon: 'https://cdn.simpleicons.org/discord/9146FF',
             text: 'Discord',
             url: 'https://discord.gg/EPcWRvJcdv'
         }
-        
-        // COME AGGIUNGERE PULSANTI:
-        // 
-        // Opzione 1 - Con immagine custom:
-        // {
-        //     icon: 'https://cdn.simpleicons.org/twitter/1DA1F2',
-        //     text: 'Twitter',
-        //     url: 'https://twitter.com/tuoaccount'
-        // }
-        //
-        // Opzione 2 - Con emoji:
-        // {
-        //     icon: '📱',
-        //     text: 'Contatti',
-        //     url: 'https://tuo-link.com'
-        // }
-        //
-        // LOGHI DISPONIBILI SU cdn.simpleicons.org:
         // - instagram
         // - tiktok
         // - youtube
@@ -76,16 +51,10 @@ const CONFIG = {
         // - patreon
         // - onlyfans
         // - reddit
-        // E molti altri su: https://simpleicons.org
-        //
-        // Formato URL: https://cdn.simpleicons.org/NOME/COLORE
-        // Esempio: https://cdn.simpleicons.org/instagram/E4405F
+        // https://simpleicons.org
+
     ]
 };
-
-// ============================================
-// 💻 CODICE - NON MODIFICARE SOTTO QUESTA LINEA
-// ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
@@ -98,7 +67,6 @@ function initializePage() {
     enableLogoDrag();
 }
 
-// Setup del logo
 function setupLogo() {
     const logoElement = document.getElementById('logo');
     const logoContainer = document.getElementById('logoContainer');
@@ -112,7 +80,6 @@ function setupLogo() {
     }
 }
 
-// Setup del titolo
 function setupTitle() {
     const titleElement = document.getElementById('title');
     
@@ -124,7 +91,6 @@ function setupTitle() {
     }
 }
 
-// Setup dei pulsanti
 function setupButtons() {
     const menuElement = document.getElementById('menu');
     menuElement.innerHTML = '';
@@ -135,7 +101,6 @@ function setupButtons() {
     });
 }
 
-// Crea un singolo pulsante
 function createButton(buttonData, index) {
     const link = document.createElement('a');
     link.href = buttonData.url;
@@ -148,18 +113,15 @@ function createButton(buttonData, index) {
         const iconContainer = document.createElement('span');
         iconContainer.className = 'menu-item-icon';
         
-        // Check if icon is a URL (starts with http:// or https://)
         if (buttonData.icon.startsWith('http://') || buttonData.icon.startsWith('https://')) {
             const iconImg = document.createElement('img');
             iconImg.src = buttonData.icon;
             iconImg.alt = buttonData.text + ' icon';
             iconImg.onerror = function() {
-                // Fallback to emoji if image fails to load
                 iconContainer.textContent = '🔗';
             };
             iconContainer.appendChild(iconImg);
         } else {
-            // It's an emoji or text
             iconContainer.textContent = buttonData.icon;
         }
         
@@ -199,11 +161,9 @@ function enableLogoDrag() {
     const startDrag = (clientX, clientY) => {
         clearRestoreTimer();
 
-        // salva la posizione “originale” (dove deve tornare)
         originalRect = logo.getBoundingClientRect();
         savedInlineStyle = logo.getAttribute("style") || "";
 
-        // stacca dal layout e blocca alla posizione attuale
         logo.style.position = 'fixed';
         logo.style.left = `${originalRect.left}px`;
         logo.style.top = `${originalRect.top}px`;
@@ -234,18 +194,15 @@ function enableLogoDrag() {
     const animateBackToOriginal = () => {
         if (!originalRect) return;
 
-        // animazione fluida verso la posizione salvata
         logo.style.transition = 'left 450ms ease, top 450ms ease, transform 450ms ease';
         logo.style.left = `${originalRect.left}px`;
         logo.style.top = `${originalRect.top}px`;
 
         const onEnd = (e) => {
-            // basta una delle due (left/top) per chiudere
             if (e.propertyName !== 'left' && e.propertyName !== 'top') return;
 
             logo.removeEventListener('transitionend', onEnd);
 
-            // ripristina lo stile originale (torna "nel layout")
             if (savedInlineStyle) logo.setAttribute("style", savedInlineStyle);
             else logo.removeAttribute("style");
 
@@ -262,14 +219,12 @@ function enableLogoDrag() {
         isDragging = false;
         logo.classList.remove('dragging');
 
-        // dopo 5 secondi torna al punto di partenza
         clearRestoreTimer();
         restoreTimer = setTimeout(() => {
             animateBackToOriginal();
         }, 5000);
     };
 
-    // Mouse: solo click sinistro
     logo.addEventListener('mousedown', (e) => {
         if (e.button !== 0) return;
         e.preventDefault();
@@ -279,7 +234,6 @@ function enableLogoDrag() {
     window.addEventListener('mousemove', (e) => moveDrag(e.clientX, e.clientY));
     window.addEventListener('mouseup', endDrag);
 
-    // Touch
     logo.addEventListener('touchstart', (e) => {
         if (!e.touches || !e.touches[0]) return;
         e.preventDefault();
@@ -293,7 +247,6 @@ function enableLogoDrag() {
 
     window.addEventListener('touchend', endDrag);
 
-    // Se ridimensioni finestra mentre è "staccato", evita posizioni strane
     window.addEventListener('resize', () => {
         if (!isDragging) return;
         const rect = logo.getBoundingClientRect();
@@ -302,7 +255,5 @@ function enableLogoDrag() {
     });
 }
 
-
-// Log di inizializzazione
 console.log('%c✅ Link Hub Initialized', 'color: #ffffff; font-size: 14px; font-weight: bold; font-family: JetBrains Mono;');
 console.log('%cConfigured with ' + CONFIG.buttons.length + ' buttons', 'color: #a3a3a3; font-family: JetBrains Mono;');
