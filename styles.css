@@ -1,0 +1,211 @@
+:root{
+  --bg-primary:#000000;
+  --bg-secondary:#171717;   /* grigio pulsanti */
+  --bg-tertiary:#262626;
+  --text-primary:#ffffff;
+  --text-secondary:#a3a3a3;
+  --border:#404040;
+  --border-light:#525252;
+
+  --accent-green:#55e929;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'JetBrains Mono', monospace;
+  color:var(--text-primary);
+
+  /* Sfondo: bagliore verde scuro/opaco */
+  background:
+    radial-gradient(900px 520px at 20% 15%, rgba(85,233,41,0.14) 0%, rgba(85,233,41,0.06) 38%, rgba(85,233,41,0.00) 70%),
+    radial-gradient(750px 480px at 80% 35%, rgba(85,233,41,0.10) 0%, rgba(85,233,41,0.04) 40%, rgba(85,233,41,0.00) 72%),
+    linear-gradient(135deg, #0b120b 0%, var(--bg-secondary) 52%, var(--bg-primary) 100%);
+  background-attachment:fixed;
+
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.container{
+  width:100%;
+  max-width:320px;
+  animation:fadeIn .6s ease-out;
+}
+
+/* Animazioni */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes slideDown{
+  from{opacity:0; transform:translateY(-20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes slideIn{
+  from{opacity:0; transform:translateX(-30px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+/* Header */
+.header{
+  text-align:center;
+  margin-bottom:32px;
+  animation:slideDown .5s ease-out;
+}
+
+/* Riserva spazio fisso al logo: titolo e pulsanti NON cambiano mai altezza */
+.logo-container{
+  margin-bottom:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:120px; /* = dimensione logo desktop */
+}
+
+.logo{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--border);
+  background:var(--bg-secondary);
+  transition:transform .3s ease, border-color .3s ease;
+
+  cursor:grab;
+  user-select:none;
+  -webkit-user-drag:none;
+  touch-action:none;
+}
+
+.logo:hover{
+  transform:scale(1.05);
+  border-color:var(--border-light);
+}
+
+.logo.dragging{
+  cursor:grabbing;
+}
+
+.title{
+  font-size:1.875rem;
+  font-weight:700;
+  color:var(--text-primary);
+  letter-spacing:-0.01em;
+}
+
+/* Menu */
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.menu-item{
+  position:relative;
+  border:1px solid var(--border);
+  padding:16px 24px;
+  text-decoration:none;
+  color:var(--text-primary);
+  font-size:1rem;
+  font-weight:400;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+
+  /* Centra icona + testo nel box */
+  justify-content:center;
+  text-align:center;
+  gap:12px;
+
+  /* Pulsanti: grigio pieno */
+  background:var(--bg-secondary);
+
+  transition:transform .2s ease, border-color .2s ease, background .2s ease;
+  animation:slideIn .4s ease-out backwards;
+}
+
+.menu-item:nth-child(1){animation-delay:.05s;}
+.menu-item:nth-child(2){animation-delay:.10s;}
+.menu-item:nth-child(3){animation-delay:.15s;}
+.menu-item:nth-child(4){animation-delay:.20s;}
+.menu-item:nth-child(5){animation-delay:.25s;}
+.menu-item:nth-child(6){animation-delay:.30s;}
+.menu-item:nth-child(7){animation-delay:.35s;}
+.menu-item:nth-child(8){animation-delay:.40s;}
+
+.menu-item:hover{
+  border-color:var(--border-light);
+  background:var(--bg-tertiary);
+}
+
+.menu-item:active{
+  transform:scale(.98);
+}
+
+.menu-item:focus-visible{
+  outline:2px solid rgba(85,233,41,.55);
+  outline-offset:2px;
+}
+
+.menu-item-icon{
+  width:24px;
+  height:24px;
+  font-size:24px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu-item-icon img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+}
+
+/* Footer */
+.footer{
+  margin-top:48px;
+  opacity:0;
+  animation:fadeIn .6s ease-out .5s forwards;
+}
+
+.footer-line{
+  height:1px;
+  background:var(--border);
+}
+
+/* Utility */
+.hidden{
+  display:none !important;
+}
+
+/* Responsive */
+@media (max-width:640px){
+  .container{max-width:300px;}
+  .logo-container{height:100px;}
+  .logo{width:100px; height:100px;}
+  .title{font-size:1.5rem;}
+  .menu-item{padding:14px 20px; font-size:.95rem;}
+  .menu-item-icon, .menu-item-icon img{width:22px; height:22px;}
+}
+
+@media (max-width:400px){
+  .container{max-width:280px;}
+  .logo-container{height:90px;}
+  .logo{width:90px; height:90px;}
+  .title{font-size:1.375rem;}
+  .menu-item{padding:12px 18px; font-size:.9rem;}
+  .menu-item-icon, .menu-item-icon img{width:20px; height:20px;}
+}
